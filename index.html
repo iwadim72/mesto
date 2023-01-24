@@ -11,7 +11,7 @@
 <body class="body">
     <div class="page">
         <header class="header">
-            <img src="./images/logo.png" alt="Логотип Место" class="header__logo">
+            <img src="./images/logo.svg" alt="Логотип Место" class="header__logo">
         </header>
         <main class="main">
             <section class="profile">
@@ -20,24 +20,12 @@
                     <div class="profile__info">
                         <div class="profile__container">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
-                            <button class="profile__edit-button"></button>
+                            <button class="profile__edit-button" type="button"></button>
                         </div>
                         <p class="profile__name-description">Исследователь океана</p>
                     </div>
                 </div>
-                <button class="profile__add-button"></button>
-            </section>
-
-            <section class="popup">
-                <div class="popup__container">
-                    <h2 class="popup__description">Редактировать профиль</h2>
-                    <form class="popup__form">
-                        <input class="popup__firstname" type="text" value="Жак-Ив Кусто">
-                        <input class="popup__name-description" type="text" value="Исследователь океана">
-                        <input class="popup__submit" type="submit" value="Сохранить">
-                    </form>
-                    <button class="popup__close"></button>
-                </div>
+                <button class="profile__add-button" type="button"></button>
             </section>
 
             <section class="places">
@@ -46,47 +34,62 @@
                         <img class="places__photo" src="./images/Karachaevsk.jpg" alt="Монастырь">
                         <div class="places__name-container">
                             <h3 class="places__name">Карачаевск</h3>
-                            <button class="places__like"></button>
+                            <button class="places__like" type="button"></button>
                         </div>
                     </li>
                     <li class="places__element">
                         <img class="places__photo" src="./images/Elbrus.png" alt="Гора Эльбрус">
                         <div class="places__name-container">
                             <h3 class="places__name">Гора Эльбрус</h3>
-                            <button class="places__like"></button>
+                            <button class="places__like" type="button"></button>
                         </div>
                     </li>
                     <li class="places__element">
                         <img class="places__photo" src="./images/Dombai.png" alt="Гора Домбай">
                         <div class="places__name-container">
                             <h3 class="places__name">Домбай</h3>
-                            <button class="places__like"></button>
+                            <button class="places__like" type="button"></button>
                         </div>
                     </li>
                     <li class="places__element">
                         <img class="places__photo" src="./images/Elbrus.png" alt="Гора Эльбрус">
                         <div class="places__name-container">
                             <h3 class="places__name">Гора Эльбрус</h3>
-                            <button class="places__like"></button>
+                            <button class="places__like" type="button"></button>
                         </div>
                     </li>
                     <li class="places__element">
                         <img class="places__photo" src="./images/Dombai.png" alt="Гора Домбай">
                         <div class="places__name-container">
                             <h3 class="places__name">Домбай</h3>
-                            <button class="places__like"></button>
+                            <button class="places__like" type="button"></button>
                         </div>
                     </li>
                     <li class="places__element">
                         <img class="places__photo" src="./images/Karachaevsk.jpg" alt="Монастырь">
                         <div class="places__name-container">
                             <h3 class="places__name">Карачаево-Черкиссияяяяяяяяяяяяяяяяяяяя</h3>
-                            <button class="places__like"></button>
+                            <button class="places__like" type="button"></button>
                         </div>
                     </li>
                 </ul>
             </section>
         </main>
+
+        <section class="popup">
+            <div class="popup__container">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <form class="popup__form" name="popup">
+                    <input class="popup__text-input popup__text-input_content_name" type="text" value="Жак-Ив Кусто"
+                        required placeholder="Имя">
+                    <input class="popup__text-input popup__text-input_content_job" type="text" required
+                        value="Исследователь океана" placeholder="Описание">
+                    <input class="popup__submit" type="submit" value="Сохранить">
+                </form>
+                <button class="popup__close" type="button"></button>
+            </div>
+        </section>
+
         <footer class="footer">
             <p class="footer__author">© 2020 Mesto Russia</p>
         </footer>
