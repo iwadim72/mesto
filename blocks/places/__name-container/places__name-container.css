@@ -1,0 +1,7 @@
+.places__name-container {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: baseline;
+    margin: 25px 20px 0;
+}
