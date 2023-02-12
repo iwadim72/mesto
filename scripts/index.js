@@ -68,7 +68,7 @@ function handleFormSubmit(evt) {
     evt.preventDefault();
     userName.textContent = nameInput.value;
     userJob.textContent = jobInput.value;
-    closePopup();
+    closePopup(profilePopup);
 }
 
 
@@ -86,7 +86,7 @@ const handleFormSubmitAddPlace = (evt) => {
         link: placeUrl.value
     }
     addPlaceElement(createCard(inputValue));
-    closePopupAddPlace()
+    closePopup(popupAddPlace);
 }
 
 initialCards.forEach((element) => {
