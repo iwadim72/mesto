@@ -49,6 +49,30 @@
             </div>
         </section>
 
+        <section class="popup popup_function_add-place">
+            <div class="popup__container">
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__form popup__form_function_add-place" name="popup-add-place">
+                    <input class="popup__text-input popup__text-input_content_place-name" type="text" required
+                        placeholder="Название">
+                    <input class="popup__text-input popup__text-input_content_place-url" type="text" required
+                        placeholder="Ссылка на картинку">
+                    <input class="popup__submit" type="submit" value="Создать">
+                </form>
+                <button class="popup__close popup__close_place_add-place" type="button"></button>
+            </div>
+        </section>
+
+        <section class="popup-photo popup">
+            <div class="popup-photo__container">
+                <figure class="popup-photo__figure">
+                    <img class="popup-photo__capture">
+                    <figcaption class="popup-photo__capture-name"></figcaption>
+                </figure>
+                <button class="popup__close popup__close_place_photo" type="button"></button>
+            </div>
+        </section>
+
         <footer class="footer">
             <p class="footer__author">© 2020 Mesto Russia</p>
         </footer>
@@ -60,6 +84,7 @@
             <div class="places__name-container">
                 <h3 class="places__name"></h3>
                 <button class="places__like" type="button"></button>
+                <button class="places__delete" type="button"></button>
             </div>
         </li>
     </template>
