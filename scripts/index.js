@@ -81,11 +81,11 @@ function scalingPhoto(evt) {
 
 const handleFormSubmitAddPlace = (evt) => {
     evt.preventDefault();
-    const InputValue = {
+    const inputValue = {
         name: placeName.value,
         link: placeUrl.value
     }
-    addPlaceElement(createCard(InputValue));
+    addPlaceElement(createCard(inputValue));
     closePopupAddPlace()
 }
 
