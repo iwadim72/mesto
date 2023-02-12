@@ -72,6 +72,12 @@ function handleFormSubmit(evt) {
 }
 
 
+function scalingPhoto(evt) {
+    popupPhoto.classList.add('popup_opened');
+    popupPhoto.querySelector('.popup-photo__capture').src = evt.target.src;
+    popupPhoto.querySelector('.popup-photo__capture-name').textContent = evt.target.alt;
+}
+
 const handleFormSubmitAddPlace = (evt) => {
     evt.preventDefault();
     addPlaceElement(placeName.value, placeUrl.value);
@@ -113,9 +119,7 @@ formAddPlace.addEventListener('submit', handleFormSubmitAddPlace);
 placesContainer.addEventListener('click', (evt) => {
     console.log(evt.target);
     if (evt.target.classList.contains('places__photo')) {
-        popupPhoto.classList.add('popup_opened');
-        popupPhoto.querySelector('.popup-photo__capture').src = evt.target.src;
-        popupPhoto.querySelector('.popup-photo__capture-name').textContent = evt.target.alt;
+        scalingPhoto(evt);
     }
 
     if (evt.target.classList.contains('places__like')) {
