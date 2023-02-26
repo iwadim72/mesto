@@ -55,7 +55,6 @@ function addPlaceElement(cardElement) {
     placesContainer.prepend(cardElement);
 }
 
-
 function openPopup(popup) {
     popup.classList.add('popup_opened');
 }
@@ -70,7 +69,6 @@ function handleFormSubmit(evt) {
     userJob.textContent = jobInput.value;
     closePopup(profilePopup);
 }
-
 
 function scalingPhoto(evt) {
     openPopup(popupPhoto);
@@ -106,8 +104,22 @@ addPlaceButton.addEventListener('click', () => {
 
 closeButtons.forEach((button) => {
     const popup = button.closest('.popup');
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup')) {
+            closePopup(popup);
+        }
+    })
+    document.addEventListener('keydown', (evt) => {
+        console.log(evt.key);
+        if (evt.key === 'Escape') {
+            closePopup(popup);
+        }
+    })
     button.addEventListener('click', () => closePopup(popup));
 });
+
+
+
 
 formElement.addEventListener('submit', handleFormSubmit);
 

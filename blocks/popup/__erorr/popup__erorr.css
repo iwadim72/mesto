@@ -1,0 +1,11 @@
+.popup__erorr {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    width: 356px;
+    position: absolute;
+    top: 60px;
+    left: 36px;
+    z-index: 1;
+}
