@@ -88,16 +88,17 @@ initialCards.forEach((element) => {
 buttonOpenPopupProfile.addEventListener('click', () => {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.textContent;
-    const buttonSubmit = popup.querySelector(settingsValidation.submitButtonSelector);
+    const buttonSubmit = profilePopup.querySelector(settingsValidation.submitButtonSelector);
     disableButtonSubmit(buttonSubmit);
-    resetValidationError(popup);
+    resetValidationError(profilePopup);
     openPopup(profilePopup);
 })
 
 buttonOpenPopupAddPlace.addEventListener('click', () => {
     formAddPlace.reset();
-    const buttonSubmit = popup.querySelector(settingsValidation.submitButtonSelector);
+    const buttonSubmit = popupAddPlace.querySelector(settingsValidation.submitButtonSelector);
     disableButtonSubmit(buttonSubmit);
+    resetValidationError(popupAddPlace);
     openPopup(popupAddPlace);
 })
 
