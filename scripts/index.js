@@ -16,32 +16,6 @@ const placeUrl = document.querySelector('.popup__text-input_content_place-url');
 const jobInput = document.querySelector('.popup__text-input_content_job');
 const placesContainer = document.querySelector('.places__elements');
 const placesTemplate = document.querySelector('#places-template').content;
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 function createCard(item) {
     const cardElement = placesTemplate.querySelector('.places__element').cloneNode(true);
@@ -74,7 +48,7 @@ function closePopupByEsc(evt) {
 
 function openPopup(popup) {
     const buttonSubmit = popup.querySelector(settingsValidation.submitButtonSelector);
-    disableButtonSubmit(buttonSubmit);
+    if (buttonSubmit) { disableButtonSubmit(buttonSubmit); }
     resetValidationError(popup);
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupByEsc);

@@ -1,5 +1,6 @@
 .places__elements {
     list-style: none;
+    min-height: 56vh;
     margin: 0;
     padding: 0;
     display: grid;

@@ -4,15 +4,12 @@
     line-height: 15px;
     color: #FF0000;
     width: 356px;
-    position: absolute;
-    top: 60px;
-    left: 36px;
+    margin: 5px auto 0px;
     z-index: 1;
 }
 
 @media screen and (max-width: 590px) {
     .popup__erorr {
         width: 250px;
-        left: 20px;
     }
 }
