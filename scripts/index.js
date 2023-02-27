@@ -47,9 +47,6 @@ function closePopupByEsc(evt) {
 }
 
 function openPopup(popup) {
-    const buttonSubmit = popup.querySelector(settingsValidation.submitButtonSelector);
-    if (buttonSubmit) { disableButtonSubmit(buttonSubmit); }
-    resetValidationError(popup);
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupByEsc);
 }
@@ -91,11 +88,16 @@ initialCards.forEach((element) => {
 buttonOpenPopupProfile.addEventListener('click', () => {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.textContent;
+    const buttonSubmit = popup.querySelector(settingsValidation.submitButtonSelector);
+    disableButtonSubmit(buttonSubmit);
+    resetValidationError(popup);
     openPopup(profilePopup);
 })
 
 buttonOpenPopupAddPlace.addEventListener('click', () => {
     formAddPlace.reset();
+    const buttonSubmit = popup.querySelector(settingsValidation.submitButtonSelector);
+    disableButtonSubmit(buttonSubmit);
     openPopup(popupAddPlace);
 })
 
