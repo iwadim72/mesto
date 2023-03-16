@@ -15,7 +15,6 @@ const placeName = document.querySelector('.popup__text-input_content_place-name'
 const placeUrl = document.querySelector('.popup__text-input_content_place-url');
 const jobInput = document.querySelector('.popup__text-input_content_job');
 const placesContainer = document.querySelector('.places__elements');
-const placesTemplate = document.querySelector('#places-template').content;
 
 
 function addPlaceElement(cardElement) {
@@ -46,7 +45,7 @@ function handleFormSubmitProfile(evt) {
     closePopup(profilePopup);
 }
 
-export function scalingPhoto(evt) {
+function scalingPhoto(evt) {
     popupPhotoCapture.src = evt.target.src;
     popupPhotoCapture.alt = evt.target.alt;
     popupPhotoName.textContent = evt.target.alt;
@@ -65,10 +64,13 @@ const handleFormSubmitAddPlace = (evt) => {
     closePopup(popupAddPlace);
 }
 
+import initialCards from './initialCards.js'
 
 initialCards.forEach((element) => {
     addPlaceElement(new Card(element, '#places-template').generateCard());
 })
+
+import { settingsValidation, disableButtonSubmit, resetValidationError } from "./validate.js";
 
 buttonOpenPopupProfile.addEventListener('click', () => {
     nameInput.value = userName.textContent;
@@ -103,4 +105,6 @@ buttonsClosePopup.forEach((button) => {
 formProfile.addEventListener('submit', handleFormSubmitProfile);
 
 formAddPlace.addEventListener('submit', handleFormSubmitAddPlace);
+
+export { scalingPhoto, formAddPlace, formProfile };
 
