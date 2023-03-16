@@ -1,10 +1,9 @@
-import { scalingPhoto } from "./index.js";
-
 class Card {
-    constructor(item, templateSelector) {
+    constructor(item, templateSelector, handleCardClick) {
         this._name = item.name;
         this._link = item.link;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
     }
 
     _getTemplate() {
@@ -26,10 +25,8 @@ class Card {
     }
 
     _setEventListeners() {
-        this._cardLike = this._element.querySelector('.places__like');
-        this._buttonDeleteCard = this._element.querySelector('.places__delete');
-        this._cardPhoto.addEventListener('click', (evt) => {
-            scalingPhoto(evt);
+        this._cardPhoto.addEventListener('click', () => {
+            this._handleCardClick(this._name, this._link)
         });
         this._cardLike.addEventListener('click', () => {
             this._handleSwitchLike();
@@ -42,6 +39,8 @@ class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._cardPhoto = this._element.querySelector('.places__photo');
+        this._cardLike = this._element.querySelector('.places__like');
+        this._buttonDeleteCard = this._element.querySelector('.places__delete');
         this._setEventListeners();
 
         this._cardPhoto.src = this._link;

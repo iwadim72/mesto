@@ -1,5 +1,3 @@
-import { formProfile, formAddPlace } from './index.js';
-
 const settingsValidation = {
     formSelector: '.popup__form',
     inputSelector: '.popup__text-input',
@@ -65,6 +63,13 @@ class FormValidator {
         });
     }
 
+    resetValidation() {
+        this._toggleButtonState();
+        this._inputList.forEach((inputElement) => {
+            this._hideInputError(inputElement)
+        })
+    }
+
     enableValidation() {
         this._formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
@@ -73,32 +78,8 @@ class FormValidator {
     }
 }
 
-const validatorFormProfile = new FormValidator(settingsValidation, formProfile);
-validatorFormProfile.enableValidation();
 
-const validatorFormAddPlace = new FormValidator(settingsValidation, formAddPlace);
-validatorFormAddPlace.enableValidation();
-
-
-const disableButtonSubmit = (buttonSubmit) => {
-    buttonSubmit.classList.add(settingsValidation.inactiveButtonClass);
-}
-
-const hideInputError = (formElement, inputElement, settings) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(settings.inputErrorClass);
-    errorElement.classList.remove(settings.errorClass);
-    errorElement.textContent = '';
-}
-
-const resetValidationError = (formElement) => {
-    const formElementInputList = formElement.querySelectorAll(settingsValidation.inputSelector);
-    formElementInputList.forEach((formElementInput) => {
-        hideInputError(formElement, formElementInput, settingsValidation);
-    })
-}
-
-export { settingsValidation, disableButtonSubmit, resetValidationError };
+export { settingsValidation, FormValidator };
 
 
 

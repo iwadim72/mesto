@@ -1,3 +1,7 @@
+import { settingsValidation, FormValidator } from "./FormValidator.js";
+import { Card } from "./Card.js";
+import initialCards from './initialCards.js'
+
 const profilePopup = document.querySelector('.profile-popup');
 const popupAddPlace = document.querySelector('.popup_function_add-place');
 const popupPhoto = document.querySelector('.popup-photo');
@@ -5,9 +9,9 @@ const popupPhotoCapture = popupPhoto.querySelector('.popup-photo__capture');
 const popupPhotoName = popupPhoto.querySelector('.popup-photo__capture-name');
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const buttonOpenPopupAddPlace = document.querySelector('.profile__add-button');
-const buttonsClosePopup = document.querySelectorAll('.popup__close');
-const formProfile = profilePopup.querySelector('.popup__form');
-const formAddPlace = document.querySelector('.popup__form_function_add-place');
+const closeButtons = document.querySelectorAll('.popup__close');
+const formProfile = document.forms['popup-profile'];
+const formAddPlace = document.forms['popup-add-place'];
 const userName = document.querySelector('.profile__name');
 const userJob = document.querySelector('.profile__name-description');
 const nameInput = document.querySelector('.popup__text-input_content_name');
@@ -19,6 +23,10 @@ const placesContainer = document.querySelector('.places__elements');
 
 function addPlaceElement(cardElement) {
     placesContainer.prepend(cardElement);
+}
+
+function createCard(item) {
+    return new Card(item, '#places-template', handleCardClick).generateCard();
 }
 
 function closePopupByEsc(evt) {
@@ -45,14 +53,12 @@ function handleFormSubmitProfile(evt) {
     closePopup(profilePopup);
 }
 
-function scalingPhoto(evt) {
-    popupPhotoCapture.src = evt.target.src;
-    popupPhotoCapture.alt = evt.target.alt;
-    popupPhotoName.textContent = evt.target.alt;
+function handleCardClick(name, link) {
+    popupPhotoCapture.src = link;
+    popupPhotoCapture.alt = name;
+    popupPhotoName.textContent = name;
     openPopup(popupPhoto);
 }
-
-import { Card } from "./Card.js";
 
 const handleFormSubmitAddPlace = (evt) => {
     evt.preventDefault();
@@ -60,36 +66,44 @@ const handleFormSubmitAddPlace = (evt) => {
         name: placeName.value,
         link: placeUrl.value
     }
-    addPlaceElement(new Card(inputValue, '#places-template').generateCard());
+    addPlaceElement(createCard(inputValue));
     closePopup(popupAddPlace);
 }
 
-import initialCards from './initialCards.js'
-
 initialCards.forEach((element) => {
-    addPlaceElement(new Card(element, '#places-template').generateCard());
+    addPlaceElement(createCard(element));
 })
 
-import { settingsValidation, disableButtonSubmit, resetValidationError } from "./FormValidator.js";
+
+const formValidators = {};
+
+const enableValidation = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector))
+    formList.forEach((formElement) => {
+        const validator = new FormValidator(config, formElement);
+        const formName = formElement.getAttribute('name');
+
+        formValidators[formName] = validator;
+        validator.enableValidation();
+    });
+}
+
+enableValidation(settingsValidation);
 
 buttonOpenPopupProfile.addEventListener('click', () => {
     nameInput.value = userName.textContent;
     jobInput.value = userJob.textContent;
-    const buttonSubmit = profilePopup.querySelector(settingsValidation.submitButtonSelector);
-    disableButtonSubmit(buttonSubmit);
-    resetValidationError(profilePopup);
+    formValidators['popup-profile'].resetValidation();
     openPopup(profilePopup);
 })
 
 buttonOpenPopupAddPlace.addEventListener('click', () => {
     formAddPlace.reset();
-    const buttonSubmit = popupAddPlace.querySelector(settingsValidation.submitButtonSelector);
-    disableButtonSubmit(buttonSubmit);
-    resetValidationError(popupAddPlace);
+    formValidators["popup-add-place"].resetValidation();
     openPopup(popupAddPlace);
 })
 
-buttonsClosePopup.forEach((button) => {
+closeButtons.forEach((button) => {
     const popup = button.closest('.popup');
     popup.addEventListener('click', (evt) => {
         if (evt.target.classList.contains('popup')) {
@@ -99,12 +113,8 @@ buttonsClosePopup.forEach((button) => {
     button.addEventListener('click', () => closePopup(popup));
 });
 
-
-
-
 formProfile.addEventListener('submit', handleFormSubmitProfile);
-
 formAddPlace.addEventListener('submit', handleFormSubmitAddPlace);
 
-export { scalingPhoto, formAddPlace, formProfile };
+export { handleCardClick, formAddPlace, formProfile };
 
