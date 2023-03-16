@@ -17,23 +17,6 @@ const jobInput = document.querySelector('.popup__text-input_content_job');
 const placesContainer = document.querySelector('.places__elements');
 const placesTemplate = document.querySelector('#places-template').content;
 
-function createCard(item) {
-    const cardElement = placesTemplate.querySelector('.places__element').cloneNode(true);
-    const cardPhoto = cardElement.querySelector('.places__photo');
-    const cardLike = cardElement.querySelector('.places__like');
-    const buttonDeleteCard = cardElement.querySelector('.places__delete')
-    cardPhoto.src = item.link;
-    cardPhoto.alt = item.name;
-    cardElement.querySelector('.places__name').textContent = item.name;
-    cardPhoto.addEventListener('click', scalingPhoto);
-    cardLike.addEventListener('click', () => {
-        cardLike.classList.toggle('places__like_active');
-    })
-    buttonDeleteCard.addEventListener('click', () => {
-        cardElement.remove();
-    })
-    return cardElement
-}
 
 function addPlaceElement(cardElement) {
     placesContainer.prepend(cardElement);
@@ -63,13 +46,14 @@ function handleFormSubmitProfile(evt) {
     closePopup(profilePopup);
 }
 
-function scalingPhoto(evt) {
+export function scalingPhoto(evt) {
     popupPhotoCapture.src = evt.target.src;
     popupPhotoCapture.alt = evt.target.alt;
     popupPhotoName.textContent = evt.target.alt;
     openPopup(popupPhoto);
 }
 
+import { Card } from "./Card.js";
 
 const handleFormSubmitAddPlace = (evt) => {
     evt.preventDefault();
@@ -77,12 +61,13 @@ const handleFormSubmitAddPlace = (evt) => {
         name: placeName.value,
         link: placeUrl.value
     }
-    addPlaceElement(createCard(inputValue));
+    addPlaceElement(new Card(inputValue, '#places-template').generateCard());
     closePopup(popupAddPlace);
 }
 
+
 initialCards.forEach((element) => {
-    addPlaceElement(createCard(element));
+    addPlaceElement(new Card(element, '#places-template').generateCard());
 })
 
 buttonOpenPopupProfile.addEventListener('click', () => {
@@ -118,5 +103,4 @@ buttonsClosePopup.forEach((button) => {
 formProfile.addEventListener('submit', handleFormSubmitProfile);
 
 formAddPlace.addEventListener('submit', handleFormSubmitAddPlace);
-
 
