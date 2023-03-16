@@ -70,7 +70,7 @@ initialCards.forEach((element) => {
     addPlaceElement(new Card(element, '#places-template').generateCard());
 })
 
-import { settingsValidation, disableButtonSubmit, resetValidationError } from "./validate.js";
+import { settingsValidation, disableButtonSubmit, resetValidationError } from "./FormValidator.js";
 
 buttonOpenPopupProfile.addEventListener('click', () => {
     nameInput.value = userName.textContent;
