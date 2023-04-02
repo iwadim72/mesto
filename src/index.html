@@ -4,19 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
 </head>
 
 <body class="body">
     <div class="page">
         <header class="header">
-            <img src="./images/logo.svg" alt="Логотип Место" class="header__logo">
+            <img src="<%=require('./images/logo.svg')%>" alt="Логотип Место" class="header__logo">
         </header>
         <main class="main">
             <section class="profile">
                 <div class="profile__main-info">
-                    <img class="profile__avatar" src="./images/Avatar.jpg" alt="Аватар">
+                    <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="Аватар">
                     <div class="profile__info">
                         <div class="profile__container">
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -56,13 +55,13 @@
             <form class="popup__form" name="popup-profile" novalidate>
                 <label class="popup__field">
                     <input class="popup__text-input popup__text-input_content_name" type="text" value="Жак-Ив Кусто"
-                        placeholder="Имя" id="name-input" minlength="2" maxlength="40" required>
+                        placeholder="Имя" id="name-input" name="name" minlength="2" maxlength="40" required>
                     <span class="popup__erorr name-input-error"></span>
                 </label>
                 <label class="popup__field">
                     <input class="popup__text-input popup__text-input_content_job" type="text"
-                        value="Исследователь океана" placeholder="Описание" id="job-input" minlength="2" maxlength="200"
-                        required>
+                        value="Исследователь океана" placeholder="Описание" id="job-input" name="job" minlength="2"
+                        maxlength="200" required>
                     <span class="popup__erorr job-input-error"></span>
                 </label>
                 <button class="popup__submit" type="submit">Сохранить</button>
@@ -77,12 +76,12 @@
             <form class="popup__form popup__form_function_add-place" name="popup-add-place">
                 <label class="popup__field">
                     <input class="popup__text-input popup__text-input_content_place-name" type="text"
-                        placeholder="Название" id="place-name" minlength="2" maxlength="30" required>
+                        placeholder="Название" id="place-name" name='name' minlength="2" maxlength="30" required>
                     <span class="popup__erorr place-name-error"></span>
                 </label>
                 <label class="popup__field">
                     <input class="popup__text-input popup__text-input_content_place-url" type="url"
-                        placeholder="Ссылка на картинку" id="place-url" required>
+                        placeholder="Ссылка на картинку" id="place-url" name='link' required>
                     <span class="popup__erorr place-url-error"></span>
                 </label>
                 <button class="popup__submit" type="submit">Создать</button>
@@ -100,10 +99,6 @@
             <button class="popup__close popup__close_place_photo" type="button"></button>
         </div>
     </div>
-    <script type='module' src="./scripts/FormValidator.js"></script>
-    <script type='module' src="./scripts/initialCards.js"></script>
-    <script type="module" src="./scripts/index.js"></script>
-    <script type='module' src="./scripts/Card.js"></script>
 </body>
 
 </html>
