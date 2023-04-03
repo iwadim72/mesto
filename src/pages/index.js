@@ -50,15 +50,15 @@ function createCard(item) {
 }
 
 
-function handleFormSubmitProfile(inputsValue) {
-    userProfileInfo.setUserInfo(inputsValue);
+function handleFormSubmitProfile(inputValues) {
+    userProfileInfo.setUserInfo(inputValues);
 }
 
 function handleCardClick(name, link) {
     popupPhoto.open(name, link);
 }
-function handleFormSubmitAddPlace(inputsValue) {
-    initialCardsList.addItem(createCard(inputsValue));
+function handleFormSubmitAddPlace(inputsValues) {
+    initialCardsList.addItem(createCard(inputsValues));
     popupAddPlace.close();
 }
 
