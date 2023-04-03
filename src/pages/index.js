@@ -57,8 +57,8 @@ function handleFormSubmitProfile(inputValues) {
 function handleCardClick(name, link) {
     popupPhoto.open(name, link);
 }
-function handleFormSubmitAddPlace(inputsValues) {
-    initialCardsList.addItem(createCard(inputsValues));
+function handleFormSubmitAddPlace(inputValues) {
+    initialCardsList.addItem(createCard(inputValues));
     popupAddPlace.close();
 }
 
