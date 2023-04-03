@@ -1,11 +1,12 @@
 import '../pages/index.css';
-import { settingsValidation, FormValidator } from "../components/FormValidator.js";
+import { FormValidator } from "../components/FormValidator.js";
 import { Card } from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import initialCards from '../components/initialCards.js'
+import initialCards from '../utils/initialCards.js'
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import { settingsValidation } from '../utils/constants';
 
 const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
 const buttonOpenPopupAddPlace = document.querySelector('.profile__add-button');
@@ -15,7 +16,7 @@ const jobInput = document.querySelector('.popup__text-input_content_job');
 const initialCardsList = new Section({
     items: initialCards,
     renderer: (item) => {
-        const cardElement = new Card(item, '#places-template', handleCardClick).generateCard();
+        const cardElement = createCard(item);
         initialCardsList.addItem(cardElement);
     }
 }, '.places__elements')
@@ -49,17 +50,15 @@ function createCard(item) {
 }
 
 
-function handleFormSubmitProfile(evt, inputValue) {
-    evt.preventDefault();
-    userProfileInfo.setUserInfo(inputValue);
+function handleFormSubmitProfile(inputsValue) {
+    userProfileInfo.setUserInfo(inputsValue);
 }
 
 function handleCardClick(name, link) {
     popupPhoto.open(name, link);
 }
-function handleFormSubmitAddPlace(evt, inputValue) {
-    evt.preventDefault();
-    initialCardsList.addItem(createCard(inputValue));
+function handleFormSubmitAddPlace(inputsValue) {
+    initialCardsList.addItem(createCard(inputsValue));
     popupAddPlace.close();
 }
 

@@ -1,11 +1,3 @@
-const settingsValidation = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__text-input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_disabled',
-    inputErrorClass: 'popup__text-input_type_error',
-    errorClass: 'popup__error_visible'
-};
 
 class FormValidator {
     constructor(settings, formElement) {
@@ -54,6 +46,9 @@ class FormValidator {
     }
 
     _setEventListeners() {
+        this._formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+        });
         this._toggleButtonState();
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
@@ -71,15 +66,12 @@ class FormValidator {
     }
 
     enableValidation() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
         this._setEventListeners();
     }
 }
 
 
-export { settingsValidation, FormValidator };
+export { FormValidator };
 
 
 
