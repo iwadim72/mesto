@@ -1,5 +1,6 @@
 .places__delete {
     position: absolute;
+    display: none;
     top: 20px;
     right: 20px;
     width: 18px;
