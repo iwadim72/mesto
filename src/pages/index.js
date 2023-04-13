@@ -35,30 +35,30 @@ const userProfileInfo = new UserInfo({ profileNameSelector: '.profile__name', pr
 let userId
 
 function initializationPage() {
-    api.getProfileInfo()
-        .then((result) => {
-            userProfileInfo.setUserInfo(result);
-            userProfileInfo.setAvatar(result);
-            userId = result._id;
-            api.getInitialCards()
-                .then((result) => {
-                    const cardList = new Section({
-                        items: result,
-                        renderer: (item) => {
-                            const cardElement = createCard(item);
-                            cardList.addItemToEnd(cardElement);
-                        }
-                    }, '.places__elements');
-                    cardList.renderItems();
-                    initialCardsList = cardList;
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
+    Promise.all([
+        api.getProfileInfo(),
+        api.getInitialCards()
+    ])
+
+        .then((values) => {
+            userProfileInfo.setUserInfo(values[0]);
+            userProfileInfo.setAvatar(values[0]);
+            userId = values[0]._id;
+
+            const cardList = new Section({
+                items: values[1],
+                renderer: (item) => {
+                    const cardElement = createCard(item);
+                    cardList.addItemToEnd(cardElement);
+                }
+            }, '.places__elements');
+            cardList.renderItems();
+            initialCardsList = cardList;
         })
+
         .catch((err) => {
             console.log(err);
-        });
+        })
 }
 initializationPage();
 
@@ -68,24 +68,29 @@ popupPhoto.setEventListeners();
 popupAvatar.setEventListeners();
 popupConfirm.setEventListeners();
 
-
-buttonOpenPopupProfile.addEventListener('click', () => {
+function handleOpenPopupProfile() {
     const userInfo = userProfileInfo.getUserInfo();
     nameInput.value = userInfo.name;
     jobInput.value = userInfo.job;
     formValidators['popup-profile'].resetValidation();
     profilePopup.open();
-})
+}
 
-buttonOpenPopupAddPlace.addEventListener('click', () => {
+buttonOpenPopupProfile.addEventListener('click', handleOpenPopupProfile);
+
+function handleOpenPopupAddPlace() {
     formValidators["popup-add-place"].resetValidation();
     popupAddPlace.open();
-})
+}
 
-buttonOpenPopopAvatar.addEventListener('click', () => {
+buttonOpenPopupAddPlace.addEventListener('click', handleOpenPopupAddPlace);
+
+function handleOpenPopupAvatar() {
     formValidators['popup-avatar'].resetValidation();
     popupAvatar.open();
-})
+}
+
+buttonOpenPopopAvatar.addEventListener('click', handleOpenPopupAvatar);
 
 function createCard(item) {
     const id = item._id;
@@ -106,10 +111,13 @@ function handleFormSubmitProfile(inputValues, buttonSubmit) {
     api.setProfileInfo(inputValues)
         .then((result) => {
             userProfileInfo.setUserInfo(result);
-            buttonSubmit.textContent = 'Сохранить';
+            profilePopup.close();
         })
         .catch((err) => {
             console.log(err);
+        })
+        .finally(() => {
+            buttonSubmit.textContent = 'Сохранить';
         });
 }
 
@@ -118,10 +126,13 @@ function handleFormSubmitAvatar(inputValues, buttonSubmit) {
     api.changeAvatar(inputValues)
         .then((result) => {
             userProfileInfo.setAvatar(inputValues);
-            buttonSubmit.textContent = 'Сохранить';
+            popupAvatar.close();
         })
         .catch((err) => {
             console.log(err);
+        })
+        .finally(() => {
+            buttonSubmit.textContent = 'Сохранить';
         });
 }
 
@@ -150,6 +161,7 @@ function deleteCard(cardId, card) {
     return api.deleteCard(cardId)
         .then((result) => {
             card.deleteCard();
+            popupConfirm.close();
             return result
         })
         .catch((err) => {
@@ -170,11 +182,13 @@ function handleFormSubmitAddPlace(inputValues, buttonSubmit) {
         .then((result) => {
             initialCardsList.addItem(createCard(result))
             popupAddPlace.close();
-            buttonSubmit.textContent = 'Создать';
         })
         .catch((err) => {
             console.log(err);
         })
+        .finally(() => {
+            buttonSubmit.textContent = 'Сохранить';
+        });
 }
 
 const formValidators = {};
