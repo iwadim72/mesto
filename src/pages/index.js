@@ -2,7 +2,6 @@ import '../pages/index.css';
 import { FormValidator } from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
-import initialCards from '../utils/initialCards.js'
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -47,7 +46,7 @@ function initializationPage() {
                         items: result,
                         renderer: (item) => {
                             const cardElement = createCard(item);
-                            cardList.addItem(cardElement);
+                            cardList.addItemToEnd(cardElement);
                         }
                     }, '.places__elements');
                     cardList.renderItems();
